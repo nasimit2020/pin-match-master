@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="inputNumber" class="form-control text-center font-weight-bold" type="text">
+                    <button id="generateNumber" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input class="form-control text-center font-weight-bold" type="text" name="display" id="shownNumber">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div onclick="numberBtn(this.innerHTML)" class="button">7</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">8</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div onclick="numberBtn(this.innerHTML)" class="button">4</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">5</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div onclick="numberBtn(this.innerHTML)" class="button">1</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">2</div>
+                              <div onclick="numberBtn(this.innerHTML)" class="button">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div class="button"><</div>
+                                <div onclick="numberBtn(this.innerHTML)" class="button">0</div>
+                                <div onclick="document.getElementById('shownNumber').value = null" class="button">C</div>
+                            </div>
+                            <div>
+                                <button id="submitBtn" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left">3 try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="notPinMatch" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="pinMatch" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+    <script>
+        function numberBtn(x) {
+            document.getElementById('shownNumber').value = document.getElementById('shownNumber').value + x;
+        }
+        document.getElementById('generateNumber').addEventListener('click', function () {
+            const number = Math.random() * 10000;
+            const randomNumber = Math.round(number);
+            document.getElementById('inputNumber').value = randomNumber;
+        })
+
+        var docum = document.getElementById('submitBtn').addEventListener('click', function () {
+            if (document.getElementById('shownNumber').value == document.getElementById('inputNumber').value) {
+                document.getElementById('pinMatch').style.display = "inline";
+            }
+            else{
+                document.getElementById('notPinMatch').style.display = "inline";
+            }
+        });
+    </script>
+</body>
+</html>
